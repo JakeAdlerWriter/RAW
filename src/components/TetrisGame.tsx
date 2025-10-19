@@ -2,7 +2,6 @@ import { useEffect, useRef, useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Volume2, VolumeX, Play, Pause, RotateCcw, Music } from 'lucide-react';
 import { Button } from './ui/button';
-import catImage from 'figma:asset/09c0cf976a86ad9e1d5ab3d47e083ac5a611db29.png';
 
 // Tetromino shapes
 const TETROMINOES = {
@@ -515,27 +514,9 @@ export const TetrisGame = () => {
   };
 
   return (
-    <div className="w-full flex justify-center items-center px-4 py-8">
-      {/* Cyberpunk Cat Image - Background Only on Very Large Screens */}
-      <div className="hidden 2xl:block fixed left-12 top-1/2 -translate-y-1/2 z-0 pointer-events-none opacity-25">
-        <motion.img
-          src={catImage}
-          alt="Cyberpunk Cat"
-          className="rounded-lg"
-          style={{ 
-            filter: 'drop-shadow(0 0 30px rgba(3,225,255,0.5))',
-            width: '160px',
-            height: 'auto'
-          }}
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 0.25, x: 0 }}
-          transition={{ duration: 0.8 }}
-        />
-      </div>
-
-      {/* Game Content - Centered Container */}
-      <div className="flex flex-col lg:flex-row gap-6 items-center lg:items-start justify-center max-w-5xl w-full relative z-10">
-        {/* Game Board */}
+    <div className="flex justify-center items-center w-full px-4 pb-8">
+      <div className="flex flex-col lg:flex-row gap-6 items-center justify-center max-w-6xl">
+        {/* Game Board - CENTERED */}
         <div className="relative">
           <canvas
             ref={canvasRef}
@@ -582,7 +563,7 @@ export const TetrisGame = () => {
           </AnimatePresence>
         </div>
 
-        {/* Side Panel */}
+        {/* Side Panel - CENTERED */}
         <div className="flex flex-col gap-4 w-full lg:w-64">
           {/* Stats */}
           <div className="border-2 rounded-lg p-4" style={{ 
