@@ -19,7 +19,7 @@ export default function App() {
       <div className="fixed top-20 left-20 w-96 h-96 rounded-full blur-[100px] animate-pulse" style={{ backgroundColor: 'rgba(3, 225, 255, 0.2)' }} />
       <div className="fixed bottom-20 right-20 w-96 h-96 rounded-full blur-[100px] animate-pulse delay-1000" style={{ backgroundColor: 'rgba(220, 31, 255, 0.2)' }} />
       
-      <div className="relative z-10">
+      <div className="relative z-10 flex flex-col items-center justify-center">
         <div className="text-center py-8">
           <h1 
             className="text-5xl md:text-7xl font-mono text-transparent bg-clip-text mb-2"
