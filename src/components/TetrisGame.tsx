@@ -514,10 +514,14 @@ export const TetrisGame = () => {
   };
 
   return (
-    <div className="flex justify-center items-center w-full px-4 pb-8">
-      <div className="flex flex-col lg:flex-row gap-6 items-center justify-center max-w-6xl">
-        {/* Game Board - CENTERED */}
-        <div className="relative">
+    <div className="w-full px-4 pb-8">
+      <div className="max-w-5xl mx-auto bg-black/40 backdrop-blur-sm border-2 rounded-xl p-6" style={{
+        borderColor: '#03E1FF',
+        boxShadow: '0 0 40px rgba(3,225,255,0.3)'
+      }}>
+        <div className="flex flex-col lg:flex-row gap-6 items-start justify-center">
+          {/* Game Board */}
+          <div className="relative mx-auto lg:mx-0">
           <canvas
             ref={canvasRef}
             width={BOARD_WIDTH * BLOCK_SIZE}
@@ -563,8 +567,8 @@ export const TetrisGame = () => {
           </AnimatePresence>
         </div>
 
-        {/* Side Panel - CENTERED */}
-        <div className="flex flex-col gap-4 w-full lg:w-64">
+        {/* Side Panel */}
+        <div className="flex flex-col gap-4 w-full lg:w-64 mx-auto lg:mx-0">
           {/* Stats */}
           <div className="border-2 rounded-lg p-4" style={{ 
             backgroundColor: '#000000', 
@@ -738,6 +742,7 @@ export const TetrisGame = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };
