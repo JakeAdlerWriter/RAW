@@ -515,33 +515,33 @@ export const TetrisGame = () => {
   };
 
   return (
-    <div className="relative w-full min-h-screen overflow-x-hidden">
-      {/* Cyberpunk Cat Image - Background Decoration Only */}
-      <div className="hidden 2xl:block fixed left-4 top-1/2 -translate-y-1/2 z-0 pointer-events-none">
+    <div className="w-full flex justify-center items-center px-4 py-8">
+      {/* Cyberpunk Cat Image - Background Only on Very Large Screens */}
+      <div className="hidden 2xl:block fixed left-12 top-1/2 -translate-y-1/2 z-0 pointer-events-none opacity-25">
         <motion.img
           src={catImage}
           alt="Cyberpunk Cat"
-          className="rounded-lg opacity-40"
+          className="rounded-lg"
           style={{ 
-            filter: 'drop-shadow(0 0 30px rgba(3,225,255,0.6))',
-            width: '200px',
+            filter: 'drop-shadow(0 0 30px rgba(3,225,255,0.5))',
+            width: '160px',
             height: 'auto'
           }}
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 0.4, x: 0 }}
+          initial={{ opacity: 0, x: -30 }}
+          animate={{ opacity: 0.25, x: 0 }}
           transition={{ duration: 0.8 }}
         />
       </div>
 
-      {/* Game Content Container - Always Centered */}
-      <div className="relative z-10 flex flex-col lg:flex-row gap-6 items-center justify-center p-4 min-h-screen mx-auto" style={{ maxWidth: '1400px' }}>
-          {/* Game Board */}
-        <div className="relative flex-shrink-0">
+      {/* Game Content - Centered Container */}
+      <div className="flex flex-col lg:flex-row gap-6 items-center lg:items-start justify-center max-w-5xl w-full relative z-10">
+        {/* Game Board */}
+        <div className="relative">
           <canvas
             ref={canvasRef}
             width={BOARD_WIDTH * BLOCK_SIZE}
             height={BOARD_HEIGHT * BLOCK_SIZE}
-            className="border-2 rounded-lg mx-auto"
+            className="border-2 rounded-lg"
             style={{ 
               background: '#000000',
               borderColor: '#03E1FF',
@@ -549,212 +549,212 @@ export const TetrisGame = () => {
             }}
           />
         
-        <AnimatePresence>
-          {(gameOver || !isPlaying || isPaused) && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="absolute inset-0 flex items-center justify-center bg-black/80 backdrop-blur-sm rounded-lg"
-            >
-              <div className="text-center space-y-4">
-                {gameOver && (
-                  <>
-                    <h2 className="text-4xl font-mono" style={{ color: '#03E1FF', textShadow: '0 0 20px rgba(3,225,255,0.8)' }}>
-                      GAME OVER
+          <AnimatePresence>
+            {(gameOver || !isPlaying || isPaused) && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="absolute inset-0 flex items-center justify-center bg-black/80 backdrop-blur-sm rounded-lg"
+              >
+                <div className="text-center space-y-4">
+                  {gameOver && (
+                    <>
+                      <h2 className="text-4xl font-mono" style={{ color: '#03E1FF', textShadow: '0 0 20px rgba(3,225,255,0.8)' }}>
+                        GAME OVER
+                      </h2>
+                      <p className="text-2xl" style={{ color: '#DC1FFF' }}>Score: {score}</p>
+                    </>
+                  )}
+                  {!isPlaying && !gameOver && (
+                    <h2 className="text-5xl cyberpunk-title">
+                      ATOMIC TETRIS
                     </h2>
-                    <p className="text-2xl" style={{ color: '#DC1FFF' }}>Score: {score}</p>
-                  </>
-                )}
-                {!isPlaying && !gameOver && (
-                  <h2 className="text-5xl cyberpunk-title">
-                    ATOMIC TETRIS
-                  </h2>
-                )}
-                {isPaused && isPlaying && (
-                  <h2 className="text-4xl font-mono" style={{ color: '#00FFA3', textShadow: '0 0 20px rgba(0,255,163,0.8)' }}>
-                    PAUSED
-                  </h2>
-                )}
-              </div>
-            </motion.div>
-          )}
+                  )}
+                  {isPaused && isPlaying && (
+                    <h2 className="text-4xl font-mono" style={{ color: '#00FFA3', textShadow: '0 0 20px rgba(0,255,163,0.8)' }}>
+                      PAUSED
+                    </h2>
+                  )}
+                </div>
+              </motion.div>
+            )}
           </AnimatePresence>
         </div>
 
         {/* Side Panel */}
         <div className="flex flex-col gap-4 w-full lg:w-64">
-        {/* Stats */}
-        <div className="border-2 rounded-lg p-4" style={{ 
-          backgroundColor: '#000000', 
-          borderColor: '#DC1FFF',
-          boxShadow: '0 0 20px rgba(220,31,255,0.3)'
-        }}>
-          <div className="space-y-3">
-            <div>
-              <p className="text-sm font-mono" style={{ color: '#DC1FFF' }}>SCORE</p>
-              <p className="text-3xl font-mono" style={{ color: '#03E1FF' }}>{score}</p>
-            </div>
-            <div>
-              <p className="text-sm font-mono" style={{ color: '#DC1FFF' }}>LEVEL</p>
-              <p className="text-2xl font-mono" style={{ color: '#00FFA3' }}>{level}</p>
-            </div>
-            <div>
-              <p className="text-sm font-mono" style={{ color: '#DC1FFF' }}>LINES</p>
-              <p className="text-2xl font-mono" style={{ color: '#00FFA3' }}>{lines}</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Next Piece */}
-        {nextPiece && (
-          <div className="border-2 rounded-lg p-4" style={{
-            backgroundColor: '#000000',
-            borderColor: '#03E1FF',
-            boxShadow: '0 0 20px rgba(3,225,255,0.3)'
+          {/* Stats */}
+          <div className="border-2 rounded-lg p-4" style={{ 
+            backgroundColor: '#000000', 
+            borderColor: '#DC1FFF',
+            boxShadow: '0 0 20px rgba(220,31,255,0.3)'
           }}>
-            <p className="text-sm font-mono mb-2" style={{ color: '#03E1FF' }}>NEXT</p>
-            <div className="flex justify-center items-center h-20">
-              <div className="grid gap-1" style={{ 
-                gridTemplateColumns: `repeat(${TETROMINOES[nextPiece].shape[0].length}, 20px)`,
-                gridTemplateRows: `repeat(${TETROMINOES[nextPiece].shape.length}, 20px)`
-              }}>
-                {TETROMINOES[nextPiece].shape.map((row, y) =>
-                  row.map((cell, x) => (
-                    <div
-                      key={`${y}-${x}`}
-                      className={`w-5 h-5 rounded-sm ${cell ? 'opacity-100' : 'opacity-0'}`}
-                      style={cell ? {
-                        backgroundColor: TETROMINOES[nextPiece].color,
-                        boxShadow: `0 0 10px ${TETROMINOES[nextPiece].glow}`
-                      } : {}}
-                    />
-                  ))
-                )}
+            <div className="space-y-3">
+              <div>
+                <p className="text-sm font-mono" style={{ color: '#DC1FFF' }}>SCORE</p>
+                <p className="text-3xl font-mono" style={{ color: '#03E1FF' }}>{score}</p>
+              </div>
+              <div>
+                <p className="text-sm font-mono" style={{ color: '#DC1FFF' }}>LEVEL</p>
+                <p className="text-2xl font-mono" style={{ color: '#00FFA3' }}>{level}</p>
+              </div>
+              <div>
+                <p className="text-sm font-mono" style={{ color: '#DC1FFF' }}>LINES</p>
+                <p className="text-2xl font-mono" style={{ color: '#00FFA3' }}>{lines}</p>
               </div>
             </div>
           </div>
-        )}
 
-        {/* Controls */}
-        <div className="border-2 rounded-lg p-4 space-y-2" style={{
-          backgroundColor: '#000000',
-          borderColor: '#00FFA3',
-          boxShadow: '0 0 20px rgba(0,255,163,0.3)'
-        }}>
-          <Button
-            onClick={startGame}
-            className="w-full text-white border"
-            style={{ 
-              backgroundColor: '#03E1FF',
+          {/* Next Piece */}
+          {nextPiece && (
+            <div className="border-2 rounded-lg p-4" style={{
+              backgroundColor: '#000000',
               borderColor: '#03E1FF',
-              boxShadow: '0 0 15px rgba(3,225,255,0.5)'
-            }}
-          >
-            <Play className="mr-2 h-4 w-4" />
-            {gameOver ? 'NEW GAME' : 'START'}
-          </Button>
-          
-          <Button
-            onClick={togglePause}
-            disabled={!isPlaying || gameOver}
-            className="w-full text-white border"
-            style={{ 
-              backgroundColor: '#00FFA3',
-              borderColor: '#00FFA3',
-              boxShadow: '0 0 15px rgba(0,255,163,0.5)'
-            }}
-          >
-            {isPaused ? <Play className="mr-2 h-4 w-4" /> : <Pause className="mr-2 h-4 w-4" />}
-            {isPaused ? 'RESUME' : 'PAUSE'}
-          </Button>
+              boxShadow: '0 0 20px rgba(3,225,255,0.3)'
+            }}>
+              <p className="text-sm font-mono mb-2" style={{ color: '#03E1FF' }}>NEXT</p>
+              <div className="flex justify-center items-center h-20">
+                <div className="grid gap-1" style={{ 
+                  gridTemplateColumns: `repeat(${TETROMINOES[nextPiece].shape[0].length}, 20px)`,
+                  gridTemplateRows: `repeat(${TETROMINOES[nextPiece].shape.length}, 20px)`
+                }}>
+                  {TETROMINOES[nextPiece].shape.map((row, y) =>
+                    row.map((cell, x) => (
+                      <div
+                        key={`${y}-${x}`}
+                        className={`w-5 h-5 rounded-sm ${cell ? 'opacity-100' : 'opacity-0'}`}
+                        style={cell ? {
+                          backgroundColor: TETROMINOES[nextPiece].color,
+                          boxShadow: `0 0 10px ${TETROMINOES[nextPiece].glow}`
+                        } : {}}
+                      />
+                    ))
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
 
-          <Button
-            onClick={() => setMusicEnabled(!musicEnabled)}
-            variant="outline"
-            className="w-full"
-            style={{
-              borderColor: '#DC1FFF',
-              color: '#DC1FFF'
-            }}
-          >
-            <Music className="mr-2 h-4 w-4" />
-            MUSIC {musicEnabled ? 'ON' : 'OFF'}
-          </Button>
+          {/* Controls */}
+          <div className="border-2 rounded-lg p-4 space-y-2" style={{
+            backgroundColor: '#000000',
+            borderColor: '#00FFA3',
+            boxShadow: '0 0 20px rgba(0,255,163,0.3)'
+          }}>
+            <Button
+              onClick={startGame}
+              className="w-full text-white border"
+              style={{ 
+                backgroundColor: '#03E1FF',
+                borderColor: '#03E1FF',
+                boxShadow: '0 0 15px rgba(3,225,255,0.5)'
+              }}
+            >
+              <Play className="mr-2 h-4 w-4" />
+              {gameOver ? 'NEW GAME' : 'START'}
+            </Button>
+            
+            <Button
+              onClick={togglePause}
+              disabled={!isPlaying || gameOver}
+              className="w-full text-white border"
+              style={{ 
+                backgroundColor: '#00FFA3',
+                borderColor: '#00FFA3',
+                boxShadow: '0 0 15px rgba(0,255,163,0.5)'
+              }}
+            >
+              {isPaused ? <Play className="mr-2 h-4 w-4" /> : <Pause className="mr-2 h-4 w-4" />}
+              {isPaused ? 'RESUME' : 'PAUSE'}
+            </Button>
 
-          <Button
-            onClick={() => setSoundEnabled(!soundEnabled)}
-            variant="outline"
-            className="w-full"
-            style={{
-              borderColor: '#DC1FFF',
-              color: '#DC1FFF'
-            }}
-          >
-            {soundEnabled ? <Volume2 className="mr-2 h-4 w-4" /> : <VolumeX className="mr-2 h-4 w-4" />}
-            SOUND {soundEnabled ? 'ON' : 'OFF'}
-          </Button>
-        </div>
+            <Button
+              onClick={() => setMusicEnabled(!musicEnabled)}
+              variant="outline"
+              className="w-full"
+              style={{
+                borderColor: '#DC1FFF',
+                color: '#DC1FFF'
+              }}
+            >
+              <Music className="mr-2 h-4 w-4" />
+              MUSIC {musicEnabled ? 'ON' : 'OFF'}
+            </Button>
 
-        {/* Desktop Controls Info */}
-        <div className="border-2 rounded-lg p-4 hidden lg:block" style={{
-          backgroundColor: '#000000',
-          borderColor: '#DC1FFF',
-          boxShadow: '0 0 20px rgba(220,31,255,0.3)'
-        }}>
-          <p className="text-sm font-mono mb-2" style={{ color: '#DC1FFF' }}>CONTROLS</p>
-          <div className="text-xs space-y-1 font-mono" style={{ color: '#03E1FF' }}>
-            <p>← → : Move</p>
-            <p>↓ : Soft Drop</p>
-            <p>↑ / SPACE : Rotate</p>
-            <p>ENTER : Hard Drop</p>
-            <p>P : Pause</p>
+            <Button
+              onClick={() => setSoundEnabled(!soundEnabled)}
+              variant="outline"
+              className="w-full"
+              style={{
+                borderColor: '#DC1FFF',
+                color: '#DC1FFF'
+              }}
+            >
+              {soundEnabled ? <Volume2 className="mr-2 h-4 w-4" /> : <VolumeX className="mr-2 h-4 w-4" />}
+              SOUND {soundEnabled ? 'ON' : 'OFF'}
+            </Button>
           </div>
-        </div>
 
-        {/* Mobile Controls */}
-        <div className="lg:hidden grid grid-cols-3 gap-2">
-          <Button
-            onClick={() => movePiece('left')}
-            disabled={!isPlaying || gameOver || isPaused}
-            className="h-16"
-            style={{ backgroundColor: '#03E1FF' }}
-          >
-            ←
-          </Button>
-          <Button
-            onClick={rotate}
-            disabled={!isPlaying || gameOver || isPaused}
-            className="h-16"
-            style={{ backgroundColor: '#DC1FFF' }}
-          >
-            <RotateCcw />
-          </Button>
-          <Button
-            onClick={() => movePiece('right')}
-            disabled={!isPlaying || gameOver || isPaused}
-            className="h-16"
-            style={{ backgroundColor: '#03E1FF' }}
-          >
-            →
-          </Button>
-          <Button
-            onClick={() => movePiece('down')}
-            disabled={!isPlaying || gameOver || isPaused}
-            className="h-16"
-            style={{ backgroundColor: '#00FFA3' }}
-          >
-            ↓
-          </Button>
-          <Button
-            onClick={hardDrop}
-            disabled={!isPlaying || gameOver || isPaused}
-            className="h-16 col-span-2"
-            style={{ backgroundColor: '#00FFA3' }}
-          >
-            HARD DROP
-          </Button>
-        </div>
+          {/* Desktop Controls Info */}
+          <div className="border-2 rounded-lg p-4 hidden lg:block" style={{
+            backgroundColor: '#000000',
+            borderColor: '#DC1FFF',
+            boxShadow: '0 0 20px rgba(220,31,255,0.3)'
+          }}>
+            <p className="text-sm font-mono mb-2" style={{ color: '#DC1FFF' }}>CONTROLS</p>
+            <div className="text-xs space-y-1 font-mono" style={{ color: '#03E1FF' }}>
+              <p>← → : Move</p>
+              <p>↓ : Soft Drop</p>
+              <p>↑ / SPACE : Rotate</p>
+              <p>ENTER : Hard Drop</p>
+              <p>P : Pause</p>
+            </div>
+          </div>
+
+          {/* Mobile Controls */}
+          <div className="lg:hidden grid grid-cols-3 gap-2">
+            <Button
+              onClick={() => movePiece('left')}
+              disabled={!isPlaying || gameOver || isPaused}
+              className="h-16"
+              style={{ backgroundColor: '#03E1FF' }}
+            >
+              ←
+            </Button>
+            <Button
+              onClick={rotate}
+              disabled={!isPlaying || gameOver || isPaused}
+              className="h-16"
+              style={{ backgroundColor: '#DC1FFF' }}
+            >
+              <RotateCcw />
+            </Button>
+            <Button
+              onClick={() => movePiece('right')}
+              disabled={!isPlaying || gameOver || isPaused}
+              className="h-16"
+              style={{ backgroundColor: '#03E1FF' }}
+            >
+              →
+            </Button>
+            <Button
+              onClick={() => movePiece('down')}
+              disabled={!isPlaying || gameOver || isPaused}
+              className="h-16"
+              style={{ backgroundColor: '#00FFA3' }}
+            >
+              ↓
+            </Button>
+            <Button
+              onClick={hardDrop}
+              disabled={!isPlaying || gameOver || isPaused}
+              className="h-16 col-span-2"
+              style={{ backgroundColor: '#00FFA3' }}
+            >
+              HARD DROP
+            </Button>
+          </div>
         </div>
       </div>
     </div>
