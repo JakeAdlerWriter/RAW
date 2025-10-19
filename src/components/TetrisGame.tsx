@@ -517,14 +517,14 @@ export const TetrisGame = () => {
   return (
     <div className="relative flex justify-center items-start min-h-screen w-full">
       {/* Cyberpunk Cat Image */}
-      <div className="hidden xl:block absolute left-4 top-1/2 -translate-y-1/2 z-20">
+      <div className="hidden xl:block absolute left-0 top-1/2 -translate-y-1/2 z-0">
         <motion.img
           src={catImage}
           alt="Cyberpunk Cat"
           className="rounded-lg"
           style={{ 
             filter: 'drop-shadow(0 0 30px rgba(3,225,255,0.6))',
-            width: '350px',
+            width: '250px',
             height: 'auto'
           }}
           initial={{ opacity: 0, x: -50 }}
