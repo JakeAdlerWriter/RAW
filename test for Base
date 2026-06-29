@@ -1,1 +1,7 @@
+@@ -2,5 +2,5 @@
+pragma solidity ^0.8.20;
 
+contract HelloBase {
+    string public message = "I joined Base so early I had to help them place the welcome mat";
+    string public message = "Just a simple test of a type of Hello World on Sepolia Testnet";
+}
